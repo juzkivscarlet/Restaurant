@@ -5,10 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/restaurant.png" type="image/x-icon"/>
 
-    <!-- FAVICON -->
-    <link rel="icon" href="assets/img/restaurant.png" type="image/x-icon" />
-    
     <!-- TITLE -->
     <title>Reservations | Hot Restaurant</title>
 
@@ -26,7 +24,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!--JAVASCRIPT-->
-    <script type-="text/javascript" src="assets/javascript/app.js"></script>
+    <!-- <script type-="text/javascript" src="assets/js/app.js"></script> -->
 
 </head>
 
@@ -44,24 +42,24 @@
     <div class="card">
         <h5 class="card-header">Table Reservation</h5>
         <div class="card-body">
-            <form>
+            <form method="POST" role="form">
                 <div class="form-group">
-                    <label for="exampleInputName">Name</label>
-                    <input type="text" class="form-control">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPhone">Phone Number</label>
-                    <input type="tel" class="form-control">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail">Email</label>
-                    <input type="email" class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputID">Unique ID</label>
-                    <input type="text" class="form-control">
+                    <label for="id">Unique ID</label>
+                    <input type="text" class="form-control" id="id">
                 </div>
-                <div><button type="submit" class="btn btn-primary">Submit</button></div>
+                <div><button type="submit" class="btn btn-primary" id="submitBtn">Submit</button></div>
             </form>
         </div>
     </div>
@@ -69,6 +67,49 @@
     <div>
         <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
     </div>
+
+    <script type="text/javascript">
+        $("#submitBtn").on("click", function(e) {
+            e.preventDefault();
+
+            $.get("/api/tables", function(data) {
+                createCustomer(data.length);
+            });
+        });
+
+        var createCustomer = function(existing) {
+            var Customer = function(name,email,phone,id) {
+            	this.name = name;
+            	this.email = email;
+	            this.phoneNumber = phone;
+	            this.id = id;
+	            if(existing>4) this.waiting = true;
+	            else this.waiting = false;
+            };
+
+            var name = $("#name").val().trim();
+            var email = $("#email").val().trim();
+            var phone = $("#phone").val().trim();
+            var id = $("#id").val().trim();
+            var newCustomer = new Customer(name,email,phone,id);
+
+            // console.log(existing);
+
+            if(newCustomer.waiting) {
+                // if more than 5 reservations
+                $.post("/api/waitlist", newCustomer).then(function(data) {
+                    console.log("reserve.html", data);
+                    alert("Adding to waitlist.");
+                });
+            } else {
+                // add reservation
+                $.post("/api/tables", newCustomer).then(function(data) {
+                    console.log("reserve.html", data);
+                    alert("Adding reservation!");
+                });
+            }
+        };
+    </script>
 
 </body>
 
