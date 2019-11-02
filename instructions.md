@@ -49,3 +49,12 @@ Your server at this point should do the BARE MINIMUM. (Effectively, it should ju
 
 Create three HTML files one called home.html, another called tables.html, and another called reserve.html. Use dummy data and create pages similar to the one shown to you on the sample Hot Reservation webpage.
 All: If you finish early, begin thinking about how the Data, API, and Routes should look.
+
+## Phase III - For this third phase, aim to complete the following
+* Backend Team:
+Create a set of variables (hint: arrays of objects) for holding the reservation and waitlist data
+Create a set of routes that then display this data as JSONs. Users should be given these JSONs if they visit the appropriate page (i.e. if a user visits localhost:3000/api/tables they should see a JSON of table data).
+* Frontend Team:
+Temporarily join the backend team. Your task will be to create Express routes that display your HTML pages when a user visits the appropriate page. (i.e. if a user visits localhost:3000/tables... they should be shown the table.html page.)
+If you finish early begin creating the code necessary to convert your form data into JSON objects.
+---------------------
