@@ -70,3 +70,13 @@ Then create the necessary code on your reserve.html page such that it can send d
 All: This is the most challenging part of today's activity. Be persistent! You can do this!
 ---------------------
 
+## Phase V - For the fifth and final phase, aim to complete the following
+All:
+Complete any remaining functionality from the previous phase if you need more time.
+Then, thoroughly test your application for bugs. Check if there are any obvious ways to crash the application.
+Then, if you have more time -- begin to tackle any bonus of your choice:
+* Add buttons for "checking off" individuals from the reservation list. Once this happens, the next person on the waitlist should be addd to the main reservation list.
+* Add code to your server so that it "counts" every time a person visits any of the pages. Display a running count on the website.
+* Add a button for sending emails to individuals on the wait-list letting them know they have a table ready. You will need to use node-mailer or a similar npm package to make this work. (A hard task, but very cool).
+* Add a button for sending text messages to individuals on the wait-list letting them know they have a table ready. You will need to use the Twilio library to make this work. (A hard task, but very cool).
+---------------------
