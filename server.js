@@ -8,6 +8,21 @@ var path = require("path");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+// Create variables 
+// ===========================
+
+var waitlist = [];
+var reservations = [];
+
+var Customer = function(name,email,phone,id) {
+	this.name = name;
+	this.email = email;
+	this.phoneNumber = phone;
+	this.id = id;
+	if(reservations.length>5) waitlist.push(this);
+	else reservations.push(this);
+};
+
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
